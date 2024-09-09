@@ -6,9 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -18,6 +16,11 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <main className="App-body">
+        <h1>Welcome to the Body of the App</h1>
+        <p>This is the content of the body section!</p>
+      </main>
     </div>
   );
 }
