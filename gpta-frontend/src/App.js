@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import ChatWindow from './ChatWindow';
 
 function App() {
   return (
@@ -13,13 +14,13 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Generative Pre-trained Travel Assistant
         </a>
       </header>
 
       <main className="App-body">
         <h1>Welcome to the Body of the App</h1>
-        <p>This is the content of the body section!</p>
+        <ChatWindow />
       </main>
     </div>
   );
