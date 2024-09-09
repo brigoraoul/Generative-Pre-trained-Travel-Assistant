@@ -19,8 +19,13 @@ function App() {
       </header>
 
       <main className="App-body">
-        <h1>Welcome to the Body of the App</h1>
-        <ChatWindow />
+        <h1>Start chatting with your travel assistent!</h1>
+
+        <div className="chat-windows-container">
+          <ChatWindow />
+          <ChatWindow />
+        </div>
+        
       </main>
     </div>
   );

@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.chat-windows-container {
+  display: flex;  /* Flexbox to place items side by side */
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; /* Adjust based on desired width */
+  gap: 20px; /* Space between the chat windows */
+}
