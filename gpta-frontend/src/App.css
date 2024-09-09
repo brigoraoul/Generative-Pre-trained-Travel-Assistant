@@ -37,10 +37,30 @@
   }
 }
 
-.chat-windows-container {
-  display: flex;  /* Flexbox to place items side by side */
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1200px; /* Adjust based on desired width */
-  gap: 20px; /* Space between the chat windows */
+/* New styling for two chat windows side by side */
+.App-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
+
+.chat-windows-container {
+  display: flex; /* Flexbox to align chat windows horizontally */
+  justify-content: space-between; /* Space between the two chat windows */
+  width: 100%;
+  max-width: 1200px; /* Maximum width for the chat window area */
+  gap: 20px; /* Space between the chat windows */
+  padding: 20px;
+}
+
+/* Ensure each chat window has a reasonable size */
+.chat-container, .text-editor-container {
+  width: 100%;
+  max-width: 500px; /* Limit the size of each chat window */
+  flex: 1; /* Ensure both chat windows take equal space */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+

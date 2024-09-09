@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import ChatWindow from './ChatWindow';
+import TextEditor from './TextEditor';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
 
         <div className="chat-windows-container">
           <ChatWindow />
-          <ChatWindow />
+          <TextEditor />
         </div>
         
       </main>
