@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;  // Load API key from environment variables
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY_s;  // Load API key from environment variables
 
 app.post('/api/chat', async (req, res) => {
   const { prompt } = req.body;
@@ -20,7 +20,7 @@ app.post('/api/chat', async (req, res) => {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
-        model: 'gpt-4', // 'gpt-3.5-turbo', 
+        model: 'gpt-3.5-turbo', //'gpt-4', 
         messages: [{ role: 'user', content: prompt }],
       },
       {
@@ -49,4 +49,5 @@ app.post('/api/chat', async (req, res) => {
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log('API Key:', OPENAI_API_KEY);
 });
