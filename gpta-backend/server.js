@@ -1,21 +1,26 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+require('dotenv').config(); // Load environment variables from .env file
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const OPENAI_API_KEY = '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';  // Replace with your OpenAI API key
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;  // Load API key from environment variables
 
 app.post('/api/chat', async (req, res) => {
   const { prompt } = req.body;
+
+  if (!prompt) {
+    return res.status(400).send('Prompt is required');
+  }
 
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
-        model: 'gpt-4',  // or 'gpt-3.5-turbo'
+        model: 'gpt-4', // 'gpt-3.5-turbo', 
         messages: [{ role: 'user', content: prompt }],
       },
       {
@@ -24,10 +29,20 @@ app.post('/api/chat', async (req, res) => {
         },
       }
     );
-    res.json(response.data.choices[0].message.content);
+
+    // Send the response back to the client
+    res.json({ message: response.data.choices[0].message.content });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Error connecting to OpenAI');
+    console.error('Error connecting to OpenAI:', error.message);
+    
+    if (error.response) {
+      // If OpenAI responded with an error
+      console.error('OpenAI response error:', error.response.data);
+      res.status(error.response.status).send(error.response.data);
+    } else {
+      // Generic error
+      res.status(500).send('Internal Server Error');
+    }
   }
 });
 
