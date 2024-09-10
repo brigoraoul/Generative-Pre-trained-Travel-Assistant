@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Import Quill styles
+import 'react-quill/dist/quill.snow.css'; 
+import './TextEditor.css'; 
 
 const TextEditor = () => {
   const [text, setText] = useState('');
@@ -11,13 +12,13 @@ const TextEditor = () => {
 
   return (
     <div>
-      <h2>Your Travel Document</h2>
       <ReactQuill
         value={text}
         onChange={handleTextChange}
         placeholder="Write something amazing..."
         modules={TextEditor.modules}
         formats={TextEditor.formats}
+        className="custom-editor" // Custom class
       />
     </div>
   );
