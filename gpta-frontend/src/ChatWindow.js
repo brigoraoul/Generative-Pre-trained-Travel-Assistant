@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ChatWindow.css';
 import axios from 'axios';
 
-const ChatWindow = () => {
+const ChatWindow = ({ editorContent }) => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
 
@@ -14,9 +14,11 @@ const ChatWindow = () => {
       setMessages(prevMessages => [...prevMessages, userMessage]);
 
       try {
+        const fullPrompt = `${inputMessage}\n\nDocument:\n${editorContent}`;
+
         // Send the user's message to the server
         const response = await axios.post('http://localhost:5001/api/chat', {
-          prompt: inputMessage,
+          prompt: fullPrompt,
         });
 
         // Get the GPT response from the server

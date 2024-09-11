@@ -3,7 +3,8 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
 import './TextEditor.css'; 
 
-const TextEditor = () => {
+const TextEditor = ({ setEditorContent }) => {  
+
   const [text, setText] = useState('');
 
   // Switch on to save rich text locally, e.g. for development
@@ -14,12 +15,14 @@ const TextEditor = () => {
       const savedText = localStorage.getItem('editorContent');
       if (savedText) {
         setText(savedText);
+        setEditorContent(savedText);
       }
     }
   }, [saveLocally]);
 
   const handleTextChange = (value) => {
     setText(value);
+    setEditorContent(value);
     if (saveLocally) {
       localStorage.setItem('editorContent', value);
     }

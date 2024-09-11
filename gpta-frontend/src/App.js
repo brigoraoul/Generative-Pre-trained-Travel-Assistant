@@ -2,8 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import ChatWindow from './ChatWindow';
 import TextEditor from './TextEditor';
+import { useState } from 'react';
 
 function App() {
+
+  // State to store the text editor content
+  const [editorContent, setEditorContent] = useState('');
+
   return (
     <div className="App">
       <header className="App-header">
@@ -23,8 +28,8 @@ function App() {
         <h1>Start chatting with your travel assistent!</h1>
 
         <div className="chat-windows-container">
-          <ChatWindow />
-          <TextEditor />
+          <ChatWindow editorContent={editorContent} />
+          <TextEditor setEditorContent={setEditorContent} />
         </div>
         
       </main>
