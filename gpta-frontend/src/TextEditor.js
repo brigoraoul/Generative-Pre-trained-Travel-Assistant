@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
 import './TextEditor.css'; 
@@ -6,8 +6,23 @@ import './TextEditor.css';
 const TextEditor = () => {
   const [text, setText] = useState('');
 
+  // Switch on to save rich text locally, e.g. for development
+  const saveLocally = true; 
+
+  useEffect(() => {
+    if (saveLocally) {
+      const savedText = localStorage.getItem('editorContent');
+      if (savedText) {
+        setText(savedText);
+      }
+    }
+  }, [saveLocally]);
+
   const handleTextChange = (value) => {
-    setText(value); // Updates the text state when the editor content changes
+    setText(value);
+    if (saveLocally) {
+      localStorage.setItem('editorContent', value);
+    }
   };
 
   return (

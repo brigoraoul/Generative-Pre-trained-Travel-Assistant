@@ -49,3 +49,20 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
+.send-icon {
+  width: 24px;
+  height: 24px;
+  fill: #007bff; /* Color of the icon */
+}
+
+.message-input button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.message-input button:hover .send-icon {
+  fill: #0056b3;
+}
+
