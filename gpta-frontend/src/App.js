@@ -28,8 +28,8 @@ function App() {
         <h1>Start chatting with your travel assistent!</h1>
 
         <div className="chat-windows-container">
-          <ChatWindow editorContent={editorContent} />
-          <TextEditor setEditorContent={setEditorContent} />
+          <ChatWindow editorContent={editorContent} setEditorContent={setEditorContent} />
+          <TextEditor editorContent={editorContent} setEditorContent={setEditorContent} />
         </div>
         
       </main>

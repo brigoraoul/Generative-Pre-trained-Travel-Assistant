@@ -1,9 +1,10 @@
 .custom-editor .ql-container {
-    height: 400px; /* Set desired height */
+    height: 415px; 
+    max-width: 650px;
   }
   
 .custom-editor .ql-editor {
-    height: 300px; /* Adjust editor's typing area */
+    height: 415px; /* Adjust editor's typing area */
     overflow-y: auto; /* Ensure scrolling if content exceeds height */
   }
   

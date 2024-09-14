@@ -3,11 +3,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
 import './TextEditor.css'; 
 
-const TextEditor = ({ setEditorContent }) => {  
+const TextEditor = ({ editorContent, setEditorContent }) => {
 
   const [text, setText] = useState('');
 
-  // Switch on to save rich text locally, e.g. for development
+  // switch on to save rich text locally, e.g. for development
   const saveLocally = true; 
 
   useEffect(() => {
@@ -19,6 +19,10 @@ const TextEditor = ({ setEditorContent }) => {
       }
     }
   }, [saveLocally]);
+
+  useEffect(() => {
+    setText(editorContent);
+  }, [editorContent]);
 
   const handleTextChange = (value) => {
     setText(value);
@@ -42,7 +46,7 @@ const TextEditor = ({ setEditorContent }) => {
   );
 };
 
-/* Quill editor modules to customize the toolbar */
+// Quill editor modules to customize the toolbar
 TextEditor.modules = {
   toolbar: [
     [{ header: '1' }, { header: '2' }, { font: [] }],
@@ -55,7 +59,7 @@ TextEditor.modules = {
   ],
 };
 
-/* Quill editor formats */
+// Quill editor formats
 TextEditor.formats = [
   'header', 'font', 'list', 'bullet',
   'bold', 'italic', 'underline', 'strike',
