@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import ChatWindow from './ChatWindow';
-import TextEditor from './TextEditor';
+import ChatWindow from './components/ChatWindow';
+import TextEditor from './components/TextEditor';
 import { useState } from 'react';
 
 function App() {
