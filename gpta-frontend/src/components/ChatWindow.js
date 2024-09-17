@@ -31,36 +31,41 @@ const ChatWindow = ({ editorContent, setEditorContent }) => {
     }
   };
 
-  // get response via localhost open ai server (http://localhost:5001/api/chat)
   const handleSendMessage = async () => {
     if (inputMessage.trim()) {
       const userMessage = { text: inputMessage, sender: 'You' };
-
+  
       setMessages(prevMessages => [...prevMessages, userMessage]);
-
+  
       try {
-        // const fullPrompt = `${inputMessage}\n\nDocument in rich text format:\n${editorContent}`;
-        const fullPrompt = inputMessage
-
-        const response = await axios.post('http://localhost:5001/api/chat', {
-          prompt: fullPrompt,
+        // First API call with the original prompt
+        const response1 = await axios.post('http://localhost:5001/api/chat', {
+          prompt: inputMessage,
         });
-
-        const gptMessage = { text: response.data.message, sender: 'GPTA' };
-
+  
+        const gptMessage = { text: response1.data.message, sender: 'GPTA' };
         setMessages(prevMessages => [...prevMessages, gptMessage]);
-        setEditorContent(response.data.message);
-
+  
+        // Second API call with a different prompt for setting the editor content
+        const richTextPrompt = `You are an assistant that edits a travel document for the user. The user has prompted an llm to ask about the trip. If the llm response contains useful information that is not in the travel document yet, change the travel document accordingly. Only change the document if necessary and return only the new version of the document in rtf format. If you do not make any changes, return only the original document in rtf format. User prompt: \n${inputMessage}\n\n; LLM response: \n${response1}\n\n; Travel document in rtf format: \n${editorContent}\n\n`;
+        
+        const response2 = await axios.post('http://localhost:5001/api/chat', {
+          prompt: richTextPrompt,
+        });
+  
+        setEditorContent(response2.data.message);
+  
       } catch (error) {
         console.error('Error fetching GPT response:', error);
         const errorMessage = { text: 'Error: Unable to get a response from GPT', sender: 'GPTA' };
         setMessages(prevMessages => [...prevMessages, errorMessage]);
       }
-
+  
       // Clear the input field
       setInputMessage('');
     }
   };
+  
 
   const handleInputChange = (e) => {
     setInputMessage(e.target.value);
@@ -69,7 +74,7 @@ const ChatWindow = ({ editorContent, setEditorContent }) => {
   // Trigger the send button on 'Enter' key press
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleSubmit();
+      handleSendMessage();
     }
   };
 
@@ -77,7 +82,7 @@ const ChatWindow = ({ editorContent, setEditorContent }) => {
     <div className="chat-container">
       <div className="messages-list">
         {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.sender === 'agent' ? 'bot-message' : ''}`}>
+          <div key={index} className={`message ${(msg.sender === 'agent' || msg.sender === 'GPTA') ? 'bot-message' : ''}`}>
             <span>{msg.sender}: {msg.text}</span>
           </div>
         ))}
@@ -91,7 +96,7 @@ const ChatWindow = ({ editorContent, setEditorContent }) => {
           onKeyDown={handleKeyPress}  // Add this to handle Enter key
           placeholder="Type a message..."
         />
-        <button onClick={handleSubmit}>
+        <button onClick={handleSendMessage}>
           {/* Send icon (you can use an SVG icon or a FontAwesome icon if integrated) */}
           <svg
             xmlns="http://www.w3.org/2000/svg"

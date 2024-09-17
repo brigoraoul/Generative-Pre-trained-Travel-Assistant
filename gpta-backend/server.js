@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY_s;  // Load API key from environment variables
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY_d;  // Load API key from environment variables
 
 app.post('/api/chat', async (req, res) => {
   const { prompt } = req.body;
