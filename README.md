@@ -7,6 +7,7 @@ This is an LLM-agent that acts as a travel assistent. The application provides a
 
 ```
 cd gpta-frontend
+npm install
 npm start
 ```
 
@@ -14,6 +15,7 @@ npm start
 
 ```
 cd agent-backend
+pip install -r requirements.txt
 python app.py
 ```
 

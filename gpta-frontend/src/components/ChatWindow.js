@@ -17,7 +17,7 @@ const ChatWindow = ({ editorContent, setEditorContent }) => {
     setInputMessage(""); // Clear the input field
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/agent", {
+      const response = await axios.post("http://127.0.0.1:5001/agent", {
         query: inputMessage,
       });
 
